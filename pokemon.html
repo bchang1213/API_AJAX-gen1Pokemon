@@ -6,19 +6,51 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
 	<script type="text/javascript">
-		$(document).ready(function(){
-			function pokemon (){
-				for(var i = 1; i < 152; i++){
-					$("#gen1").append("<img src='http://pokeapi.co/media/img/" + i + ".png'>");
-				}
+	//Declare a function that generates the Generation 1 Pokemon.
+		function pokemon (){
+			for(var i = 1; i < 152; i++){
+				$("#gen1").append("<img src='http://pokeapi.co/media/img/" + i + ".png' pokeid='"+i+"'>");
 			}
+		}
+	//DOCUMENT READY
+		$(document).ready(function(){
+			//GENERATE THE POKEMON with the POKEMON FUNCTION
 			pokemon();
+			//WHEN THE USER CLICKS an 'img', use AJAX to CALL UPON the POKEMON API for the pokemon's information based on it's ID#.
+			$("img").click(function(){
+				var pokedata = $(this).attr("pokeid"); // Creating a variable that contains the attribute of the "pokeid" that is attached to each pokemon image, created above in the function Pokemon();.
+				$.get("http://pokeapi.co/api/v1/pokemon/"+pokedata,function(res){
+						console.log(res);
+						//now we need to create a list that contains all the possible multiple types of each pokemon, generated respectively for each one.
+						var battletype = "<ul>";
+						//Using a for-of loop to iterate over the js Object of Types from the res output of the pokemon API.
+						for (var type of res.types){
+							battletype += "<li>" + type.name+ "</li>"
+							console.log(type);
+						};
+						// This is a different type of for loop.
+						// for (var i = 0; i < res.types.length; i++){
+						// 	battletype = battletype + "<li>" + res.types[i].name+ "</li>";
+						// }
+						battletype += "</ul>";
+						console.log(battletype);
+						var thatpokemon = "<img src='http://pokeapi.co/media/img/" + pokedata + ".png'>";
+						console.log(thatpokemon);
+						$("#pokedex").html("<div class ='heightweight'><h1>"+res.name+"</h1>"+thatpokemon + "<h4>Battle Type(s)</h4>" + battletype +"<h4>Height</h4><h5>" + res.height + "</h5>" + "<h4>Weight</h4><h5>" + res.weight + "</h5>" + "</div>");
+				},"json");
+			});
+
 
 		});
 	</script>
 </head>
 <body>
-	<div id="gen1">
+	<div id="container">
+		<div id="gen1"></div>
+		<div id="info">
+			<img id="players" src="https://goo.gl/p3fqDE">
+			<div id="pokedex"></div>
+		</div>
 	</div>
 </body>
 </html>

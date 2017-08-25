@@ -3,6 +3,67 @@
 	padding: 0px;
 }
 
+div#container{
+	background-image: url("https://goo.gl/12Cnr1");
+}
+
 #gen1{
 	width: 1000px;
+	background-image:
+    	radial-gradient(
+      		white,
+      		#CDCDCD
+    	);
+}
+
+div#info{
+	width: 300px;
+}
+
+#players{
+	width: 320px;
+}
+
+#gen1,#info{
+	display: inline-block;
+	vertical-align: top;
+}
+
+#gen1{
+	border-width: 10px;
+	border-color: #6CB4DF;
+	border-style: solid;
+	padding-left: 10px;
+}
+
+#pokedex{
+	border-width: 10px;
+	border-color: #6CB4DF;
+	border-style: solid;
+	vertical-align: top;
+	width: 300px;
+	height: 600px;
+	background-image:
+    	radial-gradient(
+      		#68B9CC,
+      		#006E8F
+    	);
+}
+
+h1{
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.heightweight {
+	vertical-align: top;
+	text-align: center;
+}
+
+ul{
+	margin-bottom: 20px;
+}
+
+h5{
+	margin-bottom: 20px;
 }
